@@ -1,0 +1,24 @@
+{
+  "zhipu_api_key": "YOUR_ZHIPU_API_KEY_HERE",
+  "zhipu_model": "glm-4-flash",
+  "opml_file": "../config/BlogFeeds.md",
+  "data_dir": "./data",
+  "reports_dir": "./data/reports",
+  "timezone": "Asia/Shanghai",
+  "schedule": {
+    "morning": "09:30",
+    "afternoon": "15:30",
+    "evening": "20:30"
+  },
+  "heat_config": {
+    "mention_weight": 0.6,
+    "depth_weight": 0.3,
+    "category_weight": 0.1
+  },
+  "output_config": {
+    "topics_per_report": 3,
+    "articles_per_topic": 5,
+    "recommendation_max_length": 300,
+    "min_articles_threshold": 5
+  }
+}

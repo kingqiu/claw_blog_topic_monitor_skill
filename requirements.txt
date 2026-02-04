@@ -1,0 +1,6 @@
+feedparser==6.0.11
+python-dateutil==2.8.2
+requests==2.31.0
+zhipuai==2.1.5.20250825
+apscheduler==3.10.4
+pytz==2024.1
