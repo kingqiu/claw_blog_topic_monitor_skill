@@ -1,0 +1,136 @@
+{
+  "timestamp": "2026-02-09 午间",
+  "total_topics": 6,
+  "topics": [
+    {
+      "canonical_name": "演示文稿与路演",
+      "category": "商业演示",
+      "articles": [
+        {
+          "title": "The pitch deck is dead. Write a pitch.md instead.",
+          "link": "https://www.joanwestenberg.com/the-pitch-deck-is-dead-write-a-pitch-md-instead/",
+          "source": "joanwestenberg.com",
+          "summary": "<p>Every week, thousands of founders open Canva or Google Slides or, God help them, PowerPoint, and begin the ritual. They agonize over fonts. They nudge logos three pixels to the left. They workshop whether the TAM slide should come before or after the team slide, as though the ordering of</p>",
+          "content": "<img alt=\"The pitch deck is dead. Write a pitch.md instead.\" src=\"https://www.joanwestenberg.com/content/images/2026/02/ilya-pavlov-hXrPSgGFpqQ-unsplash.jpg\" /><p>Every week, thousands of founders open Canva or Google Slides or, God help them, PowerPoint, and begin the ritual. They agonize over fonts. They nudge logos three pixels to the left. They workshop whether the TAM slide should come before or after the team slide, as though the ordering of these particular runes determines whether capital flows // doesn&apos;t. They search &quot;pitch deck template YC&quot; and download something that looks exactly like every other deck built from a template found by searching &quot;pitch deck template YC.&quot; They use Claude Opus to generate slide decks, or Gamma to beautify scripts.</p><p>And it&apos;s a near-pointless activity.</p><p>I&apos;ve sat through hundreds of pitches at this point and I can tell you with some confidence that the &quot;quality&quot; of the deck is inversely correlated with the quality of the thinking behind it.</p><p>William Zinsser argued in <em>On Writing Well</em> that the act of writing forces clarity - because you can&apos;t write a clear sentence about a thing you don&apos;t understand. The principle applies to startup pitches. I&apos;ve met founders who could deliver a flawless twenty-minute deck, who completely fall apart when asked to write two paragraphs explaining their competitive advantage.</p><p>The deck was performance, and the writing would have been proof.</p><p>Pitch decks are a format optimized for the wrong thing. The entire medium is built around a synchronous, performative moment, and that moment, as it turns out, is a shit way to evaluate whether a business makes sense.</p><p>But we keep using them.</p><p><em>why</em>?</p><p>Part of the reason: venture ecosystem runs on pattern-matching, and the 10-slide deck is a pattern everyone recognizes. Funds have intake processes built around decks. Analysts have workflows for review",
+          "depth": 1.0,
+          "published": "2026-02-09T06:49:33+00:00",
+          "category": "趋势观点"
+        }
+      ],
+      "total_mentions": 1,
+      "avg_depth": 1.0,
+      "heat_score": 41.0,
+      "rank": 1
+    },
+    {
+      "canonical_name": "斐波那契数计算方法",
+      "category": "数学计算",
+      "articles": [
+        {
+          "title": "Computing large Fibonacci numbers",
+          "link": "https://www.johndcook.com/blog/2026/02/08/computing-large-fibonacci-numbers/",
+          "source": "johndcook.com",
+          "summary": "<p>The previous post discussed two ways to compute the nth Fibonacci number. The first is to compute all the Fibonacci numbers up to the nth iteratively using the defining property of Fibonacci numbers Fn + 2 = Fn + Fn + 1 with extended integer arithmetic. The second approach is to use Binet&#8217;s formula Fn = [&#8230;]</p>\nThe post <a href=\"https://www.johndcook.com/blog/2026/02/08/computing-large-fibonacci-numbers/\">Computing large Fibonacci numbers</a> first appeared on <a href=\"https://www.johndcook.com/blog\">John D. Cook</a>.",
+          "content": "<p>The previous post discussed two ways to compute the <em>n</em>th Fibonacci number. The first is to compute all the Fibonacci numbers up to the <em>n</em>th iteratively using the defining property of Fibonacci numbers</p>\n<p style=\"padding-left: 40px;\"><em>F</em><sub><em>n</em> + 2</sub> = <em>F</em><sub><em>n</em></sub> + <em>F</em><sub><em>n</em> + 1</sub></p>\n<p>with extended integer arithmetic.</p>\n<p>The second approach is to use Binet&#8217;s formula</p>\n<p style=\"padding-left: 40px;\"><em>F</em><sub><em>n</em></sub> = round( φ<sup><em>n</em></sup> / √ 5 )</p>\n<p>where φ is the golden ratio.</p>\n<p>It&#8217;s not clear which approach is more efficient. You could say that the iterative approach has run time <em>O</em>(<em>n</em>) while Binet&#8217;s formula is <em>O</em>(1). That doesn&#8217;t take into account how much work goes into each step, but it does suggest that eventually Binet wins.</p>\n<p>The relative efficiency of each algorithm depends on how it is implemented. In this post I will compare using Python&#8217;s integer arithmetic and the <code>mpmath</code> library for floating point. Here&#8217;s my code for both methods.</p>\n<pre>from math import log10\nimport mpmath as mp\n\ndef fib_iterate(n):\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a + b\n    return a\n\ndef digits_needed(n):\n\n    phi = (1 + 5**0.5) / 2\n    return int(n*log10(phi) - 0.5*log10(5)) + 1\n\ndef fib_mpmath(n, guard_digits=30):\n\n    digits = digits_needed(n)\n\n    # Set decimal digits of precision\n    mp.mp.dps = digits + guard_digits\n\n    sqrt5 = mp.sqrt(5)\n    phi = (1 + sqrt5) / 2\n    x = (phi ** n) / sqrt5\n\n    return int(mp.nint(x))\n</pre>\n<p>Next, here&#8217;s some code to compare the run times.</p>\n<pre>def compare(n):\n    \n    start = time.perf_counter()\n    x = fib_iterate(n)\n    elapsed = time.perf_counter() - start\n    print(elapsed)\n\n    start = time.perf_counter()\n    y = fib_mpmath(n)\n    elapsed = time.perf_counter() - start\n    print(elapsed)\n\n    if (x != y):",
+          "depth": 0.8,
+          "published": "2026-02-08T13:51:25+00:00",
+          "category": "技术探讨"
+        },
+        {
+          "title": "Fibonacci numbers and time-space tradeoffs",
+          "link": "https://www.johndcook.com/blog/2026/02/08/time-space-tradeoffs/",
+          "source": "johndcook.com",
+          "summary": "<p>A few days ago I wrote about Fibonacci numbers and certificates. As I pointed out in the article, there&#8217;s no need to certify Fibonacci numbers, but the point of the post was to illustrate the idea of a solution certificate in a simple context. Practical uses of certificates are more complicated. This time I want [&#8230;]</p>\nThe post <a href=\"https://www.johndcook.com/blog/2026/02/08/time-space-tradeoffs/\">Fibonacci numbers and time-space tradeoffs</a> first appeared on <a href=\"https://www.johndcook.com/blog\">John D. Cook</a>.",
+          "content": "<p>A few days ago I wrote about Fibonacci numbers and <a href=\"https://www.johndcook.com/blog/2026/02/05/fibonacci-certificate/\">certificates</a>. As I pointed out in the article, there&#8217;s no need to certify Fibonacci numbers, but the point of the post was to illustrate the idea of a solution certificate in a simple context. Practical uses of certificates are more complicated.</p>\n<p>This time I want to use Fibonacci numbers to illustrate space tradeoffs. The post on Fibonacci certificates imagined providing someone a pair (<em>F</em>, <em>r</em>) where <em>F</em> is a large Fibonacci number, and <em>r</em> is a certificate proving that <em>F</em> is indeed a Fibonacci number. The goal was to minimize the computational effort to verify <em>F</em>. All the recipient needed to do was compute</p>\n<p style=\"padding-left: 40px;\"><i>|</i> 5<em>F</em>² − <em>r</em>² |.</p>\n<p>The number <em>F</em> is a Fibonacci number if and only if this number equals 4. The problem with this scenario is that <em>F</em> and <em>r</em> are both large numbers. They require transmitting and storing a lot of bits.</p>\n<p>A much more space-efficient approach would be to transmit the index of the Fibonacci number and have the user compute the number. The example in the certificate post was (12586269025, 28143753123). Since 12586269025 is the 50th Fibonacci number, I could communicate it to someone by simply transmitting the number 50. That saves space, but it puts more computational burden on the recipient.</p>\n<p>Fibonacci numbers grow exponentially with index size, and so the size of the <em>n</em>th Fibonacci number in bits is proportional to <em>n</em>. But the number of bits in <em>n</em> is proportional to log <em>n</em>. When <em>n</em> is large, the difference is dramatic.</p>\n<p>How many bits are in the 1,000,000th Fibonacci number? The <em>n</em>th Fibonacci number is φ<sup><em>n</em></sup>/√5 rounded to the nearest integer, so the number of bits in the millionth Fibonacci number",
+          "depth": 0.7,
+          "published": "2026-02-08T13:51:08+00:00",
+          "category": "技术探讨"
+        }
+      ],
+      "total_mentions": 2,
+      "avg_depth": 0.75,
+      "heat_score": 39.5,
+      "rank": 2
+    },
+    {
+      "canonical_name": "Kākāpō相关",
+      "category": "生物保护",
+      "articles": [
+        {
+          "title": "Kākāpō mug by Karen James",
+          "link": "https://simonwillison.net/2026/Feb/8/kakapo-mug/#atom-everything",
+          "source": "simonwillison.net",
+          "summary": "<p>Friend and neighbour <a href=\"https://www.etsy.com/shop/KarenJamesMakes\">Karen James</a> made me a Kākāpō mug. It has a charismatic Kākāpō, four Kākāpō chicks (in celebration of the <a href=\"https://simonwillison.net/2026/Jan/8/llm-predictions-for-2026/#1-year-k-k-p-parrots-will-have-an-outstanding-breeding-season\">2026 breeding season</a>) and even has some <a href=\"https://www.theguardian.com/world/2026/jan/13/nz-kakapo-mating-season\">rimu fruit</a>!</p>\n<p><img alt=\"A simply spectacular sgraffito ceramic mug with a bold, charismatic Kākāpō parrot taking up most of the visible space. It has a yellow beard and green feathers.\" src=\"https://static.simonwillison.net/static/2026/kakapo-mug-1.jpg\" /></p>\n<p><img alt=\"Another side of the mug, two cute grey Kākāpō chicks are visible and three red rimu fruit that look like berries, one on the floor and two hanging from wiry branches.\" src=\"https://static.simonwillison.net/static/2026/kakapo-mug-2.jpg\" /></p>\n<p>I love it so much.</p>\n\n    <p>Tags: <a href=\"https://simonwillison.net/tags/kakapo\">kakapo</a>, <a href=\"https://simonwillison.net/tags/art\">art</a></p>",
+          "content": "<p>Friend and neighbour <a href=\"https://www.etsy.com/shop/KarenJamesMakes\">Karen James</a> made me a Kākāpō mug. It has a charismatic Kākāpō, four Kākāpō chicks (in celebration of the <a href=\"https://simonwillison.net/2026/Jan/8/llm-predictions-for-2026/#1-year-k-k-p-parrots-will-have-an-outstanding-breeding-season\">2026 breeding season</a>) and even has some <a href=\"https://www.theguardian.com/world/2026/jan/13/nz-kakapo-mating-season\">rimu fruit</a>!</p>\n<p><img alt=\"A simply spectacular sgraffito ceramic mug with a bold, charismatic Kākāpō parrot taking up most of the visible space. It has a yellow beard and green feathers.\" src=\"https://static.simonwillison.net/static/2026/kakapo-mug-1.jpg\" /></p>\n<p><img alt=\"Another side of the mug, two cute grey Kākāpō chicks are visible and three red rimu fruit that look like berries, one on the floor and two hanging from wiry branches.\" src=\"https://static.simonwillison.net/static/2026/kakapo-mug-2.jpg\" /></p>\n<p>I love it so much.</p>\n\n    <p>Tags: <a href=\"https://simonwillison.net/tags/kakapo\">kakapo</a>, <a href=\"https://simonwillison.net/tags/art\">art</a></p>",
+          "depth": 0.7,
+          "published": "2026-02-08T17:25:07+00:00",
+          "category": "行业动态"
+        }
+      ],
+      "total_mentions": 1,
+      "avg_depth": 0.7,
+      "heat_score": 32.0,
+      "rank": 3
+    },
+    {
+      "canonical_name": "OpenAI相关",
+      "category": "人工智能",
+      "articles": [
+        {
+          "title": "Super Bowl Matchup: Anthropic vs OpenAI",
+          "link": "https://garymarcus.substack.com/p/super-bowl-matchup-anthropic-vs-openai",
+          "source": "garymarcus.substack.com",
+          "summary": "You don&#8217;t have to be a football fan to enjoy the ads",
+          "content": "<p>Sure, tech stocks might have dropped a bunch this week, but the <em>big</em> news is that Anthropic is running its first Super Bowl ad, lampooning OpenAI&#8217;s recent decision to sell ads in ChatGPT searches. (According to the ad, &#8220;Ads are coming to AI. But not to Claude.&#8221;)</p><p>Even Sam Altman admits that it&#8217;s <a href=\"https://www.cnbc.com/2026/02/05/super-bowl-ai-ad-altman-anthropic-open-ai.html\">funny</a>:</p><div class=\"youtube-wrap\" id=\"youtube2-FBSam25u8O4\"><div class=\"youtube-inner\"></div></div><p>From what I gather, OpenAI will run some ads, too. </p><p>In the Super Bowl spirit, I have outlined today&#8217;s match-ups below. As you can see, the two big private LLM companies, although superficially similar, are actually quite different. Or at least I think that&#8217;s what you can see? Hmm&#8230;.</p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!ShHD!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fade6e42d-8fdb-4edb-9e5f-8d2af1139cf6_1720x1166.png\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"987\" src=\"https://substackcdn.com/image/fetch/$s_!ShHD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fade6e42d-8fdb-4edb-9e5f-8d2af1139cf6_1720x1166.png\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image\" tabindex=\"0\" type=\"button\"><svg fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><title></title><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46",
+          "depth": 0.7,
+          "published": "2026-02-08T21:20:33+00:00",
+          "category": "行业动态"
+        }
+      ],
+      "total_mentions": 1,
+      "avg_depth": 0.7,
+      "heat_score": 32.0,
+      "rank": 4
+    },
+    {
+      "canonical_name": "微服务与组织沟通",
+      "category": "技术架构",
+      "articles": [
+        {
+          "title": "Every Man a Microservice",
+          "link": "https://grantslatton.com/every-man-a-microservice",
+          "source": "grantslatton.com",
+          "summary": "Contra Conway",
+          "content": "<h1>Every Man a Microservice</h1>\n<blockquote>\n<p>Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations.</p>\n<p>— Melvin E. Conway, How Do Committees Invent?</p>\n</blockquote>\n<p>Conway's law appears true if you observe organizations and systems as they are, <strong>but the causality is reversed</strong>.</p>\n<p>Systems are not <em>conceived</em> by organizations, but by a single individual or a tight-knit cabal.</p>\n<p>As such, there is no communication structure to emulate. The initial idea is conjured as a gestalt and an organization <em>is built around</em> the system as it comes into existence and operates.</p>\n<p><strong>And thus we invert Conway's law</strong>: A system's design informs the communication structure of the organization that is built around it.</p>\n<p>With this in mind, we can ask: what design facilitates the most effective organization?</p>\n<p>There's a whole landscape of solutions here, but I just want to focus on one that I saw work <em>extremely</em> well in the earlier years of AWS.</p>\n<h3>The right way</h3>\n<p>The idea is your system is made up of person-sized services. A person-sized service is one whose codebase is in the realm of a few tens of thousands of lines of code.</p>\n<p>This scale is such that a single developer, working on that codebase full-time, can keep the whole codebase in their head.</p>\n<p><em>N.B. By \"codebase in head\" I don't mean they literally know every line of code. I mean they have a complete picture of all the modules, interfaces, data structures, scaling dimensions, tradeoffs, design decisions, etc.</em></p>\n<p>You want there to be a 1-to-1 mapping between each service and an individual who has that service's code completely loaded into their brain.</p>\n<p>The advantages of having the whole service loaded into an individual brain is hard to overstate.</p>\n<p><strong>It enables a ton of offline mulling</strong>. Your devs kno",
+          "depth": 0.7,
+          "published": "2026-02-08T17:54:20+00:00",
+          "category": "技术探讨"
+        }
+      ],
+      "total_mentions": 1,
+      "avg_depth": 0.7,
+      "heat_score": 32.0,
+      "rank": 5
+    },
+    {
+      "canonical_name": "键盘与故障排查",
+      "category": "硬件维护",
+      "articles": [
+        {
+          "title": "Weekly Update 490",
+          "link": "https://www.troyhunt.com/weekly-update-490/",
+          "source": "troyhunt.com",
+          "summary": "<p>A big &quot;thank you&quot; to everyone who helped me troubleshoot the problem with my &quot;Print Screen&quot; button on the new PC. Try as we all might, none of us could figure out why it refused to bind to SnagIt and instead insisted on dumping the entire</p>",
+          "content": "<img alt=\"Weekly Update 490\" src=\"https://www.troyhunt.com/content/images/2026/02/Splash-Template@1x_1-1.jpg\" /><p>A big &quot;thank you&quot; to everyone who helped me troubleshoot the problem with my &quot;Print Screen&quot; button on the new PC. Try as we all might, none of us could figure out why it refused to bind to SnagIt and instead insisted on dumping the entire collection of screens to a file on the desktop. But an <em>especailly</em> big thanks to the follower who later emailed me with an idea that didn&apos;t work, and followed up with an idea that finally <em>did!</em></p><figure class=\"kg-card kg-image-card\"><img alt=\"Weekly Update 490\" class=\"kg-image\" height=\"838\" src=\"https://www.troyhunt.com/content/images/2026/02/image.png\" width=\"1498\" /></figure><p>So, yeah, thanks Logitech for making this a real pain in the arse &#x1f926;&#x200d;&#x2642;&#xfe0f;</p>\n<!--kg-card-begin: html-->\n<div><div style=\"width: 170px; display: inline-block; margin-right: 3px;\"><a href=\"https://itunes.apple.com/au/podcast/troy-hunts-weekly-update-podcast/id1176454699?ref=troy-hunt\"><img alt=\"Weekly Update 490\" src=\"https://www.troyhunt.com/content/images/2018/05/Listen-on-Apple-Podcasts.svg\" /></a></div><div style=\"width: 175px; display: inline-block; margin-right: 3px;\"><a href=\"https://www.youtube.com/playlist?list=PL7LAAxaabizMAXnJe0s3xjQ30q12EVmjt&amp;ref=troyhunt.com\"><img alt=\"Weekly Update 490\" src=\"https://www.troyhunt.com/content/images/2024/09/Watch-and-Listen-on-YouTube.svg\" /></a></div><div style=\"width: 118px; display: inline-block; margin-right: 3px;\"><a href=\"https://open.spotify.com/show/7jMtKFohdrw6qmz8AkLqit?ref=troy-hunt\"><img alt=\"Weekly Update 490\" class=\"kg-image\" src=\"https://www.troyhunt.com/content/images/2019/10/spotify.svg\" /></a></div><div style=\"width: 120px; display: inline-block;\"><a href=\"https://omny.fm/shows/troy-hunt-weekly-update/playlists/podcast.rss?ref=troy-hunt\"><img alt=\"Weekly Update 490\" src=\"https://www.troyhunt.com/content/images",
+          "depth": 0.6,
+          "published": "2026-02-09T04:19:39+00:00",
+          "category": "实战技巧"
+        }
+      ],
+      "total_mentions": 1,
+      "avg_depth": 0.6,
+      "heat_score": 29.0,
+      "rank": 6
+    }
+  ]
+}
